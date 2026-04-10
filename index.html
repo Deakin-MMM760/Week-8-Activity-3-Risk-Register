@@ -154,8 +154,16 @@
         <p class="section-intro">Complete all five rows. Your colour-coded register updates automatically in the table below. Score badge colours update as you select likelihood and consequence.</p>
 
         <div class="prompt-box">
-          <span class="prompt-label">Scoring guide</span>
-          <p class="prompt">Likelihood: 1 = rare, 2 = unlikely, 3 = possible, 4 = likely, 5 = almost certain. Consequence: 1 = negligible, 2 = minor, 3 = moderate, 4 = major, 5 = catastrophic. Risk score = L x C. Low: 1-5. Moderate: 6-11. High: 12-19. Extreme: 20-25.</p>
+          <span class="prompt-label">Scoring guide &mdash; three separate inputs</span>
+          <p style="margin:0 0 10px;font-size:14px;color:#5f6f78;">Each risk requires three separate scores. These are explained in full in <strong>Topic 8.3</strong> on the Week 8 CloudDeakin page, including the colour-coded matrix and a worked example. Review that page before completing this activity.</p>
+          <ul style="margin:0;padding-left:20px;color:#5b6770;font-size:15px;line-height:1.8;">
+            <li><strong>Likelihood (1&ndash;5)</strong> &mdash; how probable is this risk in the next 12 months?<br>
+              <em>1 = rare &nbsp;&nbsp;2 = unlikely &nbsp;&nbsp;3 = possible &nbsp;&nbsp;4 = likely &nbsp;&nbsp;5 = almost certain</em></li>
+            <li style="margin-top:6px;"><strong>Consequence (1&ndash;5)</strong> &mdash; how serious would the impact be if it occurred?<br>
+              <em>1 = negligible &nbsp;&nbsp;2 = minor &nbsp;&nbsp;3 = moderate &nbsp;&nbsp;4 = major &nbsp;&nbsp;5 = catastrophic</em></li>
+            <li style="margin-top:6px;"><strong>Risk score</strong> &mdash; calculated automatically as Likelihood &times; Consequence.<br>
+              <em>1&ndash;5 = Low (green) &nbsp;&nbsp;6&ndash;11 = Moderate (amber) &nbsp;&nbsp;12&ndash;19 = High (orange) &nbsp;&nbsp;20&ndash;25 = Extreme (red)</em></li>
+          </ul>
         </div>
 
         <!-- R1 -->
@@ -431,7 +439,9 @@
     const btype=g('businessType');
     const fname=(g('businessName')||'Week-8-Activity-3-Risk-Register').replace(/[^a-z0-9\-\s]/gi,'').trim().replace(/\s+/g,'-');
     const th='background:#0b4f57;color:#ffffff;padding:9px 10px;border:1px solid #7aa8bf;text-align:left;';
-    const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"></head>
+    const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8">
+<style>@page { mso-page-orientation: landscape; size: 297mm 210mm; margin: 15mm 12mm; } body { font-size: 11pt; }</style>
+</head>
 <body style="font-family:Arial,sans-serif;color:#22313a;line-height:1.45;">
 <h1 style="color:#0b4f57;">MMM760 | Week 8 | Risk Register</h1>
 <p><strong>Business:</strong> ${esc(bname)}${btype?' &mdash; '+esc(btype):''}</p>
