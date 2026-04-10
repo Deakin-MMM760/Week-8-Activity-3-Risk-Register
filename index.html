@@ -11,7 +11,6 @@
       --text: #22313a; --muted: #5f6f78; --line: #c9d7dc;
       --panel: #ffffff; --page: #f5f7f8; --grey-box: #eef1f3;
       --shadow: 0 8px 24px rgba(24,39,75,0.08); --radius: 18px;
-      --score-low: #c8e6c9; --score-mod: #fff9c4; --score-high: #ffe082; --score-extreme: #ef9a9a;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -48,22 +47,41 @@
     .risk-row { border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: #fafcfc; margin-bottom: 16px; }
     .risk-row-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
     .risk-row-title { font-size: 17px; font-weight: 700; color: var(--teal-dark); margin: 0; }
-    .score-badge { font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; background: var(--grey-box); color: var(--muted); min-width: 90px; text-align: center; }
-    .score-low { background: var(--score-low); color: #1d6b38; }
-    .score-mod { background: var(--score-mod); color: #7a6b00; }
-    .score-high { background: var(--score-high); color: #7a4400; }
-    .score-extreme { background: var(--score-extreme); color: #b71c1c; }
+    .score-badge { font-size: 13px; font-weight: 700; padding: 5px 14px; border-radius: 999px; background: var(--grey-box); color: var(--muted); min-width: 120px; text-align: center; transition: background 0.2s, color 0.2s; }
+    .score-low  { background: #c8e6c9; color: #1b5e20; }
+    .score-mod  { background: #fff9c4; color: #6d5900; }
+    .score-high { background: #ffe0b2; color: #7a3800; }
+    .score-ext  { background: #ffcdd2; color: #b71c1c; }
     .subtle-box { margin-top: 16px; background: var(--orange-soft); border: 1px solid #f3cfac; border-radius: 14px; padding: 16px; }
     .subtle-box h3 { margin: 0 0 8px; font-size: 18px; color: #7d4b12; }
     .subtle-box p { margin: 6px 0; color: #6d4f27; }
+    /* Live table */
+    .live-table-section { margin-top: 28px; border: 2px solid var(--teal); border-radius: 18px; padding: 24px; background: #ffffff; }
+    .live-table-section h2 { margin: 0 0 6px; font-size: 25px; color: var(--teal-dark); }
+    .live-table-section .tbl-intro { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+    .live-table-wrap { overflow-x: auto; }
+    .live-table { width: 100%; border-collapse: collapse; min-width: 820px; font-size: 14px; }
+    .live-table th { background: #0b4f57; color: #ffffff; padding: 10px 12px; text-align: left; border: 1px solid #7aa8bf; font-size: 13px; }
+    .live-table td { border: 1px solid #b5c7cd; padding: 9px 12px; vertical-align: top; }
+    .live-table tr:nth-child(even) td { background: #f5f9fa; }
+    .live-table tr:nth-child(odd) td { background: #ffffff; }
+    .num-cell  { text-align: center; font-weight: 700; width: 32px; }
+    .score-cell { text-align: center; font-weight: 700; }
+    .level-cell { text-align: center; font-weight: 700; white-space: nowrap; }
+    .lv-low  { background: #4caf50; color: #ffffff; }
+    .lv-mod  { background: #ffc107; color: #22313a; }
+    .lv-high { background: #ff9800; color: #ffffff; }
+    .lv-ext  { background: #f44336; color: #ffffff; }
+    .empty-row td { text-align: center; color: var(--muted); font-style: italic; padding: 24px; }
+    /* Sidebar */
     .status-list { display: grid; gap: 12px; margin-top: 18px; }
     .status-item { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; background: #ffffff; }
-    .status-row { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .status-row-s { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
     .status-name { font-weight: 700; color: var(--text); }
     .status-text { font-size: 13px; font-weight: 700; padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
     .status-text.complete { background: #e3f4e8; color: #1d6b38; }
     .status-text.progress { background: #fff0e0; color: #8b5a20; }
-    .status-text.empty { background: #eef1f3; color: #5f6f78; }
+    .status-text.empty    { background: #eef1f3; color: #5f6f78; }
     .progress-bar { margin-top: 14px; height: 12px; background: #e8eef0; border-radius: 999px; overflow: hidden; }
     .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg,var(--teal),#1794a0); transition: width 0.2s; }
     .progress-copy { margin-top: 10px; font-size: 14px; color: var(--muted); }
@@ -71,11 +89,24 @@
     .sidebar-card p, .sidebar-card li { font-size: 13px; color: var(--muted); }
     .sidebar-card ul { margin: 8px 0 0 16px; padding: 0; }
     .helper-card { border-top: 6px solid var(--orange); }
+    .legend-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+    .legend-table td { padding: 5px 8px; }
+    .legend-swatch { border-radius: 6px; font-weight: 700; text-align: center; padding: 5px 8px; }
     .footer-space { height: 12px; }
     @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } .sidebar-wrap { position: static; } }
-    @media (max-width: 860px) { .two-grid, .four-grid { grid-template-columns: repeat(2,1fr); } }
-    @media (max-width: 760px) { .page { padding: 16px; } .main-card, .sidebar-card { padding: 20px; } h1 { font-size: 28px; } .four-grid { grid-template-columns: 1fr; } }
-    @media print { body { background: #fff; } .top-actions, .sidebar-wrap { display: none !important; } .layout { grid-template-columns: 1fr; } .main-card, .section, .producing-box { box-shadow: none; border: 1px solid #c6d0d5; } .page { max-width: none; padding: 0; } .section { page-break-inside: avoid; } }
+    @media (max-width: 860px)  { .two-grid, .four-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 760px)  { .page { padding: 16px; } .main-card, .sidebar-card { padding: 20px; } h1 { font-size: 28px; } .four-grid { grid-template-columns: 1fr; } }
+    @media print {
+      body { background: #fff; }
+      .top-actions, .sidebar-wrap, .section, .producing-box { display: none !important; }
+      .live-table-section { display: block !important; border: none; padding: 0; margin: 0; }
+      .layout { grid-template-columns: 1fr; }
+      .main-card { box-shadow: none; border: none; padding: 0; }
+      .page { max-width: none; padding: 0; }
+      .live-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .lv-low, .lv-mod, .lv-high, .lv-ext { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .live-table tr:nth-child(even) td, .live-table tr:nth-child(odd) td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
@@ -83,28 +114,28 @@
   <div class="top-actions">
     <button class="action-btn" type="button" id="resetBtn">Reset worksheet</button>
     <button class="action-btn" type="button" id="exportBtn">Export to Word</button>
-    <button class="action-btn" type="button" id="printBtn">Print or save as PDF</button>
+    <button class="action-btn" type="button" id="printBtn">Print register as PDF</button>
   </div>
 
   <div class="layout">
     <main class="main-card">
       <p class="eyebrow">MMM760 | Week 8</p>
       <h1>Activity 3 | Risk Register</h1>
-      <p class="intro">Build a five-row risk register for your practice business. Score each risk honestly using the likelihood/consequence matrix, identify the response strategy, and write a specific mitigation action for your two highest-scoring risks.</p>
+      <p class="intro">Build a five-row risk register for your practice business. Complete each row below — your colour-coded register table builds automatically as you go. Export or print the finished table to bring to seminar.</p>
 
       <section class="producing-box">
         <h2>What you're producing</h2>
         <p>Five identified risks across at least three different categories.</p>
-        <p>A likelihood score (1–5) and consequence score (1–5) for each risk, with a calculated risk score.</p>
+        <p>A likelihood score (1–5) and consequence score (1–5) for each risk, with an automatically calculated and colour-coded risk level.</p>
         <p>A response strategy (treat, tolerate, transfer, or terminate) for each risk.</p>
-        <p>A specific, actionable mitigation for the two highest-scoring risks.</p>
+        <p>A specific, actionable mitigation for your two highest-scoring risks.</p>
         <p>A brief reflection on what the register reveals about the business's most critical vulnerabilities.</p>
       </section>
 
-      <!-- Section 1: Context -->
+      <!-- Section 1 -->
       <section class="section">
         <h2>1. Your practice business</h2>
-        <p class="section-intro">Name the business. This sets the context for all risk identification below.</p>
+        <p class="section-intro">Name the business and describe what it does. These appear as the header of your risk register table.</p>
         <div class="two-grid">
           <div>
             <label class="field-label" for="businessName">Business name</label>
@@ -112,348 +143,134 @@
           </div>
           <div>
             <label class="field-label" for="businessType">Nature of the business</label>
-            <input type="text" id="businessType" placeholder="e.g. Mobile bookkeeping service, artisan food producer, fitness coaching">
+            <input type="text" id="businessType" placeholder="e.g. Mobile bookkeeping service, artisan food producer">
           </div>
         </div>
       </section>
 
-      <!-- Section 2: Risk Register -->
+      <!-- Section 2 -->
       <section class="section">
-        <h2>2. Risk register</h2>
-        <p class="section-intro">Complete all five risk rows. Each row requires a specific risk description, category, scores, response strategy, and — for your two highest-scoring risks — a mitigation action.</p>
+        <h2>2. Enter your risks</h2>
+        <p class="section-intro">Complete all five rows. Your colour-coded register updates automatically in the table below. Score badge colours update as you select likelihood and consequence.</p>
 
         <div class="prompt-box">
           <span class="prompt-label">Scoring guide</span>
-          <p class="prompt">Likelihood: 1 = rare, 2 = unlikely, 3 = possible, 4 = likely, 5 = almost certain. Consequence: 1 = negligible, 2 = minor, 3 = moderate, 4 = major, 5 = catastrophic. Risk score = likelihood x consequence. Low: 1–5. Moderate: 6–11. High: 12–19. Extreme: 20–25.</p>
+          <p class="prompt">Likelihood: 1 = rare, 2 = unlikely, 3 = possible, 4 = likely, 5 = almost certain. Consequence: 1 = negligible, 2 = minor, 3 = moderate, 4 = major, 5 = catastrophic. Risk score = L x C. Low: 1-5. Moderate: 6-11. High: 12-19. Extreme: 20-25.</p>
         </div>
 
-        <!-- Risk 1 -->
-        <div class="risk-row" id="riskRow1">
-          <div class="risk-row-header">
-            <p class="risk-row-title">Risk 1</p>
-            <span class="score-badge" id="scoreBadge1">Score: —</span>
-          </div>
+        <!-- R1 -->
+        <div class="risk-row">
+          <div class="risk-row-header"><p class="risk-row-title">Risk 1</p><span class="score-badge" id="sb1">Score: --</span></div>
           <div style="margin-bottom:12px;">
-            <label class="field-label" for="risk1Desc">Risk description</label>
-            <p class="field-note">Be specific. Name the cause and the consequence. "Equipment failure" is not enough. "The sole laptop used for client invoicing fails during a peak billing period, delaying all invoices by two or more weeks" is a risk.</p>
-            <textarea id="risk1Desc" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea>
+            <label class="field-label" for="r1d">Risk description</label>
+            <p class="field-note">Be specific -- name the cause and the consequence. "Equipment failure" is not enough. "The sole laptop used for invoicing fails during a peak billing period, delaying all invoices by two weeks" is a risk.</p>
+            <textarea id="r1d" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea>
           </div>
           <div class="four-grid" style="margin-bottom:12px;">
-            <div>
-              <label class="field-label" for="risk1Cat">Category</label>
-              <select id="risk1Cat">
-                <option value="">Select</option>
-                <option>Operational</option>
-                <option>Financial</option>
-                <option>Legal / compliance</option>
-                <option>Reputational</option>
-                <option>Market</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk1L">Likelihood (1–5)</label>
-              <select id="risk1L" onchange="calcScore(1)">
-                <option value="">—</option>
-                <option value="1">1 Rare</option>
-                <option value="2">2 Unlikely</option>
-                <option value="3">3 Possible</option>
-                <option value="4">4 Likely</option>
-                <option value="5">5 Almost certain</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk1C">Consequence (1–5)</label>
-              <select id="risk1C" onchange="calcScore(1)">
-                <option value="">—</option>
-                <option value="1">1 Negligible</option>
-                <option value="2">2 Minor</option>
-                <option value="3">3 Moderate</option>
-                <option value="4">4 Major</option>
-                <option value="5">5 Catastrophic</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk1Resp">Response strategy</label>
-              <select id="risk1Resp">
-                <option value="">Select</option>
-                <option>Treat</option>
-                <option>Tolerate</option>
-                <option>Transfer</option>
-                <option>Terminate</option>
-                <option>Treat and transfer</option>
-              </select>
-            </div>
+            <div><label class="field-label" for="r1cat">Category</label><select id="r1cat"><option value="">Select</option><option>Operational</option><option>Financial</option><option>Legal / compliance</option><option>Reputational</option><option>Market</option></select></div>
+            <div><label class="field-label" for="r1l">Likelihood (1-5)</label><select id="r1l"><option value="">--</option><option value="1">1 Rare</option><option value="2">2 Unlikely</option><option value="3">3 Possible</option><option value="4">4 Likely</option><option value="5">5 Almost certain</option></select></div>
+            <div><label class="field-label" for="r1c">Consequence (1-5)</label><select id="r1c"><option value="">--</option><option value="1">1 Negligible</option><option value="2">2 Minor</option><option value="3">3 Moderate</option><option value="4">4 Major</option><option value="5">5 Catastrophic</option></select></div>
+            <div><label class="field-label" for="r1resp">Response strategy</label><select id="r1resp"><option value="">Select</option><option>Treat</option><option>Tolerate</option><option>Transfer</option><option>Terminate</option><option>Treat and transfer</option></select></div>
           </div>
-          <div>
-            <label class="field-label" for="risk1Mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:14px;">(complete if this is one of your two highest-scoring risks)</span></label>
-            <textarea id="risk1Mit" class="compact-area" placeholder="Specific action — what will be done, by whom, and by when. Leave blank if this is not one of your two highest-scoring risks."></textarea>
-          </div>
+          <div><label class="field-label" for="r1mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:13px;">(complete for your two highest-scoring risks)</span></label><textarea id="r1mit" class="compact-area" placeholder="What will be done, by whom, and by when -- or leave blank if not a top-two risk."></textarea></div>
         </div>
 
-        <!-- Risk 2 -->
-        <div class="risk-row" id="riskRow2">
-          <div class="risk-row-header">
-            <p class="risk-row-title">Risk 2</p>
-            <span class="score-badge" id="scoreBadge2">Score: —</span>
-          </div>
-          <div style="margin-bottom:12px;">
-            <label class="field-label" for="risk2Desc">Risk description</label>
-            <textarea id="risk2Desc" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea>
-          </div>
+        <!-- R2 -->
+        <div class="risk-row">
+          <div class="risk-row-header"><p class="risk-row-title">Risk 2</p><span class="score-badge" id="sb2">Score: --</span></div>
+          <div style="margin-bottom:12px;"><label class="field-label" for="r2d">Risk description</label><textarea id="r2d" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea></div>
           <div class="four-grid" style="margin-bottom:12px;">
-            <div>
-              <label class="field-label" for="risk2Cat">Category</label>
-              <select id="risk2Cat">
-                <option value="">Select</option>
-                <option>Operational</option>
-                <option>Financial</option>
-                <option>Legal / compliance</option>
-                <option>Reputational</option>
-                <option>Market</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk2L">Likelihood (1–5)</label>
-              <select id="risk2L" onchange="calcScore(2)">
-                <option value="">—</option>
-                <option value="1">1 Rare</option>
-                <option value="2">2 Unlikely</option>
-                <option value="3">3 Possible</option>
-                <option value="4">4 Likely</option>
-                <option value="5">5 Almost certain</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk2C">Consequence (1–5)</label>
-              <select id="risk2C" onchange="calcScore(2)">
-                <option value="">—</option>
-                <option value="1">1 Negligible</option>
-                <option value="2">2 Minor</option>
-                <option value="3">3 Moderate</option>
-                <option value="4">4 Major</option>
-                <option value="5">5 Catastrophic</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk2Resp">Response strategy</label>
-              <select id="risk2Resp">
-                <option value="">Select</option>
-                <option>Treat</option>
-                <option>Tolerate</option>
-                <option>Transfer</option>
-                <option>Terminate</option>
-                <option>Treat and transfer</option>
-              </select>
-            </div>
+            <div><label class="field-label" for="r2cat">Category</label><select id="r2cat"><option value="">Select</option><option>Operational</option><option>Financial</option><option>Legal / compliance</option><option>Reputational</option><option>Market</option></select></div>
+            <div><label class="field-label" for="r2l">Likelihood (1-5)</label><select id="r2l"><option value="">--</option><option value="1">1 Rare</option><option value="2">2 Unlikely</option><option value="3">3 Possible</option><option value="4">4 Likely</option><option value="5">5 Almost certain</option></select></div>
+            <div><label class="field-label" for="r2c">Consequence (1-5)</label><select id="r2c"><option value="">--</option><option value="1">1 Negligible</option><option value="2">2 Minor</option><option value="3">3 Moderate</option><option value="4">4 Major</option><option value="5">5 Catastrophic</option></select></div>
+            <div><label class="field-label" for="r2resp">Response strategy</label><select id="r2resp"><option value="">Select</option><option>Treat</option><option>Tolerate</option><option>Transfer</option><option>Terminate</option><option>Treat and transfer</option></select></div>
           </div>
-          <div>
-            <label class="field-label" for="risk2Mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:14px;">(complete if this is one of your two highest-scoring risks)</span></label>
-            <textarea id="risk2Mit" class="compact-area" placeholder="Specific action — what will be done, by whom, and by when."></textarea>
-          </div>
+          <div><label class="field-label" for="r2mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:13px;">(complete for your two highest-scoring risks)</span></label><textarea id="r2mit" class="compact-area" placeholder="What will be done, by whom, and by when."></textarea></div>
         </div>
 
-        <!-- Risk 3 -->
-        <div class="risk-row" id="riskRow3">
-          <div class="risk-row-header">
-            <p class="risk-row-title">Risk 3</p>
-            <span class="score-badge" id="scoreBadge3">Score: —</span>
-          </div>
-          <div style="margin-bottom:12px;">
-            <label class="field-label" for="risk3Desc">Risk description</label>
-            <textarea id="risk3Desc" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea>
-          </div>
+        <!-- R3 -->
+        <div class="risk-row">
+          <div class="risk-row-header"><p class="risk-row-title">Risk 3</p><span class="score-badge" id="sb3">Score: --</span></div>
+          <div style="margin-bottom:12px;"><label class="field-label" for="r3d">Risk description</label><textarea id="r3d" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea></div>
           <div class="four-grid" style="margin-bottom:12px;">
-            <div>
-              <label class="field-label" for="risk3Cat">Category</label>
-              <select id="risk3Cat">
-                <option value="">Select</option>
-                <option>Operational</option>
-                <option>Financial</option>
-                <option>Legal / compliance</option>
-                <option>Reputational</option>
-                <option>Market</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk3L">Likelihood (1–5)</label>
-              <select id="risk3L" onchange="calcScore(3)">
-                <option value="">—</option>
-                <option value="1">1 Rare</option>
-                <option value="2">2 Unlikely</option>
-                <option value="3">3 Possible</option>
-                <option value="4">4 Likely</option>
-                <option value="5">5 Almost certain</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk3C">Consequence (1–5)</label>
-              <select id="risk3C" onchange="calcScore(3)">
-                <option value="">—</option>
-                <option value="1">1 Negligible</option>
-                <option value="2">2 Minor</option>
-                <option value="3">3 Moderate</option>
-                <option value="4">4 Major</option>
-                <option value="5">5 Catastrophic</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk3Resp">Response strategy</label>
-              <select id="risk3Resp">
-                <option value="">Select</option>
-                <option>Treat</option>
-                <option>Tolerate</option>
-                <option>Transfer</option>
-                <option>Terminate</option>
-                <option>Treat and transfer</option>
-              </select>
-            </div>
+            <div><label class="field-label" for="r3cat">Category</label><select id="r3cat"><option value="">Select</option><option>Operational</option><option>Financial</option><option>Legal / compliance</option><option>Reputational</option><option>Market</option></select></div>
+            <div><label class="field-label" for="r3l">Likelihood (1-5)</label><select id="r3l"><option value="">--</option><option value="1">1 Rare</option><option value="2">2 Unlikely</option><option value="3">3 Possible</option><option value="4">4 Likely</option><option value="5">5 Almost certain</option></select></div>
+            <div><label class="field-label" for="r3c">Consequence (1-5)</label><select id="r3c"><option value="">--</option><option value="1">1 Negligible</option><option value="2">2 Minor</option><option value="3">3 Moderate</option><option value="4">4 Major</option><option value="5">5 Catastrophic</option></select></div>
+            <div><label class="field-label" for="r3resp">Response strategy</label><select id="r3resp"><option value="">Select</option><option>Treat</option><option>Tolerate</option><option>Transfer</option><option>Terminate</option><option>Treat and transfer</option></select></div>
           </div>
-          <div>
-            <label class="field-label" for="risk3Mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:14px;">(complete if this is one of your two highest-scoring risks)</span></label>
-            <textarea id="risk3Mit" class="compact-area" placeholder="Specific action — what will be done, by whom, and by when."></textarea>
-          </div>
+          <div><label class="field-label" for="r3mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:13px;">(complete for your two highest-scoring risks)</span></label><textarea id="r3mit" class="compact-area" placeholder="What will be done, by whom, and by when."></textarea></div>
         </div>
 
-        <!-- Risk 4 -->
-        <div class="risk-row" id="riskRow4">
-          <div class="risk-row-header">
-            <p class="risk-row-title">Risk 4</p>
-            <span class="score-badge" id="scoreBadge4">Score: —</span>
-          </div>
-          <div style="margin-bottom:12px;">
-            <label class="field-label" for="risk4Desc">Risk description</label>
-            <textarea id="risk4Desc" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea>
-          </div>
+        <!-- R4 -->
+        <div class="risk-row">
+          <div class="risk-row-header"><p class="risk-row-title">Risk 4</p><span class="score-badge" id="sb4">Score: --</span></div>
+          <div style="margin-bottom:12px;"><label class="field-label" for="r4d">Risk description</label><textarea id="r4d" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea></div>
           <div class="four-grid" style="margin-bottom:12px;">
-            <div>
-              <label class="field-label" for="risk4Cat">Category</label>
-              <select id="risk4Cat">
-                <option value="">Select</option>
-                <option>Operational</option>
-                <option>Financial</option>
-                <option>Legal / compliance</option>
-                <option>Reputational</option>
-                <option>Market</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk4L">Likelihood (1–5)</label>
-              <select id="risk4L" onchange="calcScore(4)">
-                <option value="">—</option>
-                <option value="1">1 Rare</option>
-                <option value="2">2 Unlikely</option>
-                <option value="3">3 Possible</option>
-                <option value="4">4 Likely</option>
-                <option value="5">5 Almost certain</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk4C">Consequence (1–5)</label>
-              <select id="risk4C" onchange="calcScore(4)">
-                <option value="">—</option>
-                <option value="1">1 Negligible</option>
-                <option value="2">2 Minor</option>
-                <option value="3">3 Moderate</option>
-                <option value="4">4 Major</option>
-                <option value="5">5 Catastrophic</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk4Resp">Response strategy</label>
-              <select id="risk4Resp">
-                <option value="">Select</option>
-                <option>Treat</option>
-                <option>Tolerate</option>
-                <option>Transfer</option>
-                <option>Terminate</option>
-                <option>Treat and transfer</option>
-              </select>
-            </div>
+            <div><label class="field-label" for="r4cat">Category</label><select id="r4cat"><option value="">Select</option><option>Operational</option><option>Financial</option><option>Legal / compliance</option><option>Reputational</option><option>Market</option></select></div>
+            <div><label class="field-label" for="r4l">Likelihood (1-5)</label><select id="r4l"><option value="">--</option><option value="1">1 Rare</option><option value="2">2 Unlikely</option><option value="3">3 Possible</option><option value="4">4 Likely</option><option value="5">5 Almost certain</option></select></div>
+            <div><label class="field-label" for="r4c">Consequence (1-5)</label><select id="r4c"><option value="">--</option><option value="1">1 Negligible</option><option value="2">2 Minor</option><option value="3">3 Moderate</option><option value="4">4 Major</option><option value="5">5 Catastrophic</option></select></div>
+            <div><label class="field-label" for="r4resp">Response strategy</label><select id="r4resp"><option value="">Select</option><option>Treat</option><option>Tolerate</option><option>Transfer</option><option>Terminate</option><option>Treat and transfer</option></select></div>
           </div>
-          <div>
-            <label class="field-label" for="risk4Mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:14px;">(complete if this is one of your two highest-scoring risks)</span></label>
-            <textarea id="risk4Mit" class="compact-area" placeholder="Specific action — what will be done, by whom, and by when."></textarea>
-          </div>
+          <div><label class="field-label" for="r4mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:13px;">(complete for your two highest-scoring risks)</span></label><textarea id="r4mit" class="compact-area" placeholder="What will be done, by whom, and by when."></textarea></div>
         </div>
 
-        <!-- Risk 5 -->
-        <div class="risk-row" id="riskRow5">
-          <div class="risk-row-header">
-            <p class="risk-row-title">Risk 5</p>
-            <span class="score-badge" id="scoreBadge5">Score: —</span>
-          </div>
-          <div style="margin-bottom:12px;">
-            <label class="field-label" for="risk5Desc">Risk description</label>
-            <textarea id="risk5Desc" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea>
-          </div>
+        <!-- R5 -->
+        <div class="risk-row">
+          <div class="risk-row-header"><p class="risk-row-title">Risk 5</p><span class="score-badge" id="sb5">Score: --</span></div>
+          <div style="margin-bottom:12px;"><label class="field-label" for="r5d">Risk description</label><textarea id="r5d" class="compact-area" placeholder="Describe the specific risk for your practice business."></textarea></div>
           <div class="four-grid" style="margin-bottom:12px;">
-            <div>
-              <label class="field-label" for="risk5Cat">Category</label>
-              <select id="risk5Cat">
-                <option value="">Select</option>
-                <option>Operational</option>
-                <option>Financial</option>
-                <option>Legal / compliance</option>
-                <option>Reputational</option>
-                <option>Market</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk5L">Likelihood (1–5)</label>
-              <select id="risk5L" onchange="calcScore(5)">
-                <option value="">—</option>
-                <option value="1">1 Rare</option>
-                <option value="2">2 Unlikely</option>
-                <option value="3">3 Possible</option>
-                <option value="4">4 Likely</option>
-                <option value="5">5 Almost certain</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk5C">Consequence (1–5)</label>
-              <select id="risk5C" onchange="calcScore(5)">
-                <option value="">—</option>
-                <option value="1">1 Negligible</option>
-                <option value="2">2 Minor</option>
-                <option value="3">3 Moderate</option>
-                <option value="4">4 Major</option>
-                <option value="5">5 Catastrophic</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="risk5Resp">Response strategy</label>
-              <select id="risk5Resp">
-                <option value="">Select</option>
-                <option>Treat</option>
-                <option>Tolerate</option>
-                <option>Transfer</option>
-                <option>Terminate</option>
-                <option>Treat and transfer</option>
-              </select>
-            </div>
+            <div><label class="field-label" for="r5cat">Category</label><select id="r5cat"><option value="">Select</option><option>Operational</option><option>Financial</option><option>Legal / compliance</option><option>Reputational</option><option>Market</option></select></div>
+            <div><label class="field-label" for="r5l">Likelihood (1-5)</label><select id="r5l"><option value="">--</option><option value="1">1 Rare</option><option value="2">2 Unlikely</option><option value="3">3 Possible</option><option value="4">4 Likely</option><option value="5">5 Almost certain</option></select></div>
+            <div><label class="field-label" for="r5c">Consequence (1-5)</label><select id="r5c"><option value="">--</option><option value="1">1 Negligible</option><option value="2">2 Minor</option><option value="3">3 Moderate</option><option value="4">4 Major</option><option value="5">5 Catastrophic</option></select></div>
+            <div><label class="field-label" for="r5resp">Response strategy</label><select id="r5resp"><option value="">Select</option><option>Treat</option><option>Tolerate</option><option>Transfer</option><option>Terminate</option><option>Treat and transfer</option></select></div>
           </div>
-          <div>
-            <label class="field-label" for="risk5Mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:14px;">(complete if this is one of your two highest-scoring risks)</span></label>
-            <textarea id="risk5Mit" class="compact-area" placeholder="Specific action — what will be done, by whom, and by when."></textarea>
-          </div>
+          <div><label class="field-label" for="r5mit">Mitigation action <span style="font-weight:400;color:var(--muted);font-size:13px;">(complete for your two highest-scoring risks)</span></label><textarea id="r5mit" class="compact-area" placeholder="What will be done, by whom, and by when."></textarea></div>
         </div>
       </section>
 
-      <!-- Section 3: Reflection -->
+      <!-- LIVE TABLE -->
+      <section class="live-table-section">
+        <h2>Your risk register</h2>
+        <p class="tbl-intro">This table updates live as you complete each row above. Use <strong>Print register as PDF</strong> to save the table, or <strong>Export to Word</strong> to download the full document including reflection.</p>
+        <div style="margin-bottom:12px;font-size:14px;color:var(--muted);"><strong id="tblHeader"></strong></div>
+        <div class="live-table-wrap">
+          <table class="live-table">
+            <thead>
+              <tr>
+                <th style="width:32px; text-align:center;">#</th>
+                <th style="width:22%;">Risk description</th>
+                <th style="width:11%;">Category</th>
+                <th style="width:7%; text-align:center;">Likelihood</th>
+                <th style="width:7%; text-align:center;">Consequence</th>
+                <th style="width:6%; text-align:center;">Score</th>
+                <th style="width:9%; text-align:center;">Risk level</th>
+                <th style="width:12%;">Response strategy</th>
+                <th>Mitigation action</th>
+              </tr>
+            </thead>
+            <tbody id="tblBody">
+              <tr class="empty-row"><td colspan="9">Complete the rows above and your risk register will appear here.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px;font-size:12px;color:var(--muted);">Risk level: Low = 1-5 | Moderate = 6-11 | High = 12-19 | Extreme = 20-25. Score = Likelihood x Consequence. Framework: AS/NZS ISO 31000:2018.</p>
+      </section>
+
+      <!-- Reflection -->
       <section class="section">
         <h2>3. Reflection</h2>
         <p class="section-intro">Complete this after finishing all five rows.</p>
-        <label class="field-label" for="reflection">What does the register reveal about the business's most critical vulnerabilities — and were any of the scores higher than you initially expected?</label>
+        <label class="field-label" for="reflection">What does the register reveal about the business's most critical vulnerabilities -- and were any of the scores higher than you initially expected?</label>
         <p class="field-note">Two to three sentences. Focus on what the scoring process revealed, not just a summary of the risks.</p>
-        <textarea id="reflection" placeholder="e.g. The scoring process revealed that key person risk is significantly higher than initially felt — a likelihood of 3 multiplied by a consequence of 5 produces a score of 15, which sits in the high zone. This is the risk the business owner has the least control over, and the one most likely to be underestimated because it feels uncomfortable to plan for personal incapacity. The legal/compliance row was the most difficult to score honestly because the true consequence of a Fair Work breach is hard to quantify without knowing the specifics."></textarea>
+        <textarea id="reflection" placeholder="e.g. The scoring process revealed that key person risk is significantly higher than initially felt -- a likelihood of 3 multiplied by a consequence of 5 produces a score of 15, which sits in the high zone. This is the risk the business owner has the least control over, and the one most likely to be underestimated because it feels uncomfortable to plan for personal incapacity."></textarea>
 
         <div class="subtle-box">
           <h3>Quality check</h3>
-          <p>Are all five risks specific to your practice business — not generic descriptions?</p>
+          <p>Are all five risk descriptions specific to your practice business -- not generic?</p>
           <p>Do your five risks span at least three different categories?</p>
-          <p>Have you scored likelihood and consequence independently — not just assigned a number that feels right?</p>
-          <p>Are your two mitigation actions implementable in the next four weeks — not aspirational statements?</p>
-          <p>Did you resist the temptation to score everything low? A register full of low scores is almost certainly optimism bias.</p>
+          <p>Have you scored likelihood and consequence independently -- not just assigned a number that feels right?</p>
+          <p>Are your mitigation actions for the two highest-scoring risks implementable in the next four weeks?</p>
+          <p>Did you resist scoring everything low? A register full of green rows is almost certainly optimism bias.</p>
         </div>
       </section>
 
@@ -463,26 +280,25 @@
     <aside class="sidebar-wrap">
       <section class="sidebar-card">
         <h2>Your progress</h2>
-        <p>Use this panel to check what is finished before you export or print.</p>
+        <p>Use this panel to check what is finished before you export.</p>
         <div class="progress-bar" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
         <p class="progress-copy" id="progressCopy">0 of 3 sections complete</p>
         <div class="status-list">
-          <div class="status-item"><div class="status-row"><span class="status-name">Practice business</span><span class="status-text empty" id="statusContext">0 of 2</span></div></div>
-          <div class="status-item"><div class="status-row"><span class="status-name">Risk register (5 rows)</span><span class="status-text empty" id="statusRisks">0 of 5</span></div></div>
-          <div class="status-item"><div class="status-row"><span class="status-name">Reflection</span><span class="status-text empty" id="statusReflection">0 of 1</span></div></div>
+          <div class="status-item"><div class="status-row-s"><span class="status-name">Practice business</span><span class="status-text empty" id="sCxt">0 of 2</span></div></div>
+          <div class="status-item"><div class="status-row-s"><span class="status-name">Risk register (5 rows)</span><span class="status-text empty" id="sRsk">0 of 5</span></div></div>
+          <div class="status-item"><div class="status-row-s"><span class="status-name">Reflection</span><span class="status-text empty" id="sRef">0 of 1</span></div></div>
         </div>
       </section>
 
       <section class="sidebar-card helper-card">
-        <h2>Score calculator</h2>
-        <p>The worksheet calculates risk scores automatically when you select likelihood and consequence. The colour of each score badge shows the risk zone.</p>
-        <ul>
-          <li>Green badge: Low (1–5)</li>
-          <li>Yellow badge: Moderate (6–11)</li>
-          <li>Orange badge: High (12–19)</li>
-          <li>Red badge: Extreme (20–25)</li>
-        </ul>
-        <p style="margin-top:10px;">Write mitigation actions for the two rows with the highest scores.</p>
+        <h2>Risk level legend</h2>
+        <p>Scores calculate automatically from your selections. The table and score badges update in real time.</p>
+        <table class="legend-table">
+          <tr><td><div class="legend-swatch" style="background:#4caf50;color:#fff;">Low</div></td><td style="color:var(--muted);">Score 1-5</td></tr>
+          <tr><td><div class="legend-swatch" style="background:#ffc107;color:#22313a;">Moderate</div></td><td style="color:var(--muted);">Score 6-11</td></tr>
+          <tr><td><div class="legend-swatch" style="background:#ff9800;color:#fff;">High</div></td><td style="color:var(--muted);">Score 12-19</td></tr>
+          <tr><td><div class="legend-swatch" style="background:#f44336;color:#fff;">Extreme</div></td><td style="color:var(--muted);">Score 20-25</td></tr>
+        </table>
       </section>
 
       <section class="sidebar-card">
@@ -491,8 +307,8 @@
           <li>All five risk descriptions are specific.</li>
           <li>At least three different categories used.</li>
           <li>Likelihood and consequence scored independently.</li>
-          <li>Response strategy selected for all five risks.</li>
-          <li>Mitigation actions completed for the two highest-scoring risks.</li>
+          <li>Response strategy selected for every row.</li>
+          <li>Mitigation actions written for the two highest-scoring risks.</li>
           <li>Reflection identifies what the scoring process revealed.</li>
         </ul>
       </section>
@@ -501,143 +317,163 @@
 </div>
 
 <script>
-  const STORAGE_KEY = 'mmm760_week8_activity3_risk_register';
-
-  function getText(id) { const el = document.getElementById(id); return el ? String(el.value).trim() : ''; }
-  function setStatus(id, t, cls) { const el = document.getElementById(id); if (el) { el.textContent = t; el.className = 'status-text ' + cls; } }
-  function countFilled(ids) { return ids.filter(id => getText(id) !== '').length; }
-
-  function getScore(n) {
-    const l = parseInt(document.getElementById('risk'+n+'L').value) || 0;
-    const c = parseInt(document.getElementById('risk'+n+'C').value) || 0;
-    return l * c;
-  }
-
-  function calcScore(n) {
-    const score = getScore(n);
-    const badge = document.getElementById('scoreBadge'+n);
-    if (!badge) return;
-    if (!score) { badge.textContent = 'Score: —'; badge.className = 'score-badge'; return; }
-    badge.textContent = 'Score: ' + score;
-    if (score >= 20) badge.className = 'score-badge score-extreme';
-    else if (score >= 12) badge.className = 'score-badge score-high';
-    else if (score >= 6) badge.className = 'score-badge score-mod';
-    else badge.className = 'score-badge score-low';
-    saveState();
-  }
-
-  function countFilledRisks() {
-    let count = 0;
-    for (let i = 1; i <= 5; i++) {
-      if (getText('risk'+i+'Desc') && getText('risk'+i+'Cat') && getText('risk'+i+'L') && getText('risk'+i+'C') && getText('risk'+i+'Resp')) count++;
-    }
-    return count;
-  }
-
-  function updateProgress() {
-    const cContext = countFilled(['businessName','businessType']);
-    const cRisks = countFilledRisks();
-    const cRefl = countFilled(['reflection']);
-
-    const sections = [cContext >= 2, cRisks >= 5, cRefl >= 1];
-    const done = sections.filter(Boolean).length;
-    document.getElementById('progressFill').style.width = (done / 3 * 100) + '%';
-    document.getElementById('progressCopy').textContent = done + ' of 3 sections complete';
-
-    setStatus('statusContext', cContext + ' of 2', cContext >= 2 ? 'complete' : cContext > 0 ? 'progress' : 'empty');
-    setStatus('statusRisks', cRisks + ' of 5', cRisks >= 5 ? 'complete' : cRisks > 0 ? 'progress' : 'empty');
-    setStatus('statusReflection', cRefl + ' of 1', cRefl >= 1 ? 'complete' : 'empty');
-  }
-
-  const ALL_IDS = ['businessName','businessType',
-    'risk1Desc','risk1Cat','risk1L','risk1C','risk1Resp','risk1Mit',
-    'risk2Desc','risk2Cat','risk2L','risk2C','risk2Resp','risk2Mit',
-    'risk3Desc','risk3Cat','risk3L','risk3C','risk3Resp','risk3Mit',
-    'risk4Desc','risk4Cat','risk4L','risk4C','risk4Resp','risk4Mit',
-    'risk5Desc','risk5Cat','risk5L','risk5C','risk5Resp','risk5Mit',
+  const SK = 'mmm760_w8_a3_v2';
+  const NS = [1,2,3,4,5];
+  const IDS = ['businessName','businessType',
+    ...NS.flatMap(n=>['r'+n+'d','r'+n+'cat','r'+n+'l','r'+n+'c','r'+n+'resp','r'+n+'mit']),
     'reflection'];
 
-  function saveState() {
-    const state = {};
-    ALL_IDS.forEach(id => { const el = document.getElementById(id); if (el) state[id] = el.value; });
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
-    updateProgress();
+  function g(id){ const e=document.getElementById(id); return e?e.value.trim():''; }
+  function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
+
+  function lvl(score){
+    if(!score) return {label:'--',badgeCls:'',cellCls:''};
+    if(score>=20) return {label:'Extreme', badgeCls:'score-ext', cellCls:'lv-ext'};
+    if(score>=12) return {label:'High',    badgeCls:'score-high',cellCls:'lv-high'};
+    if(score>=6)  return {label:'Moderate',badgeCls:'score-mod', cellCls:'lv-mod'};
+    return          {label:'Low',      badgeCls:'score-low', cellCls:'lv-low'};
   }
 
-  function loadState() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) { const s = JSON.parse(raw); Object.keys(s).forEach(k => { const el = document.getElementById(k); if (el) el.value = s[k]; }); }
-    } catch(e) {}
-    for (let i = 1; i <= 5; i++) calcScore(i);
-    updateProgress();
+  function refreshBadge(n){
+    const l=parseInt(g('r'+n+'l'))||0, c=parseInt(g('r'+n+'c'))||0;
+    const score=l*c, info=lvl(score);
+    const b=document.getElementById('sb'+n); if(!b) return;
+    b.className='score-badge'+(info.badgeCls?' '+info.badgeCls:'');
+    b.textContent=score?'Score: '+score+' -- '+info.label:'Score: --';
   }
 
-  function escapeHtml(v) { return (v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
-
-  function buildRiskRows() {
-    let rows = '';
-    for (let i = 1; i <= 5; i++) {
-      const desc = getText('risk'+i+'Desc');
-      if (!desc) continue;
-      const score = getScore(i);
-      rows += `<tr>
-        <td style="padding:8px;border:1px solid #b7c7cc;">${escapeHtml(desc)}</td>
-        <td style="padding:8px;border:1px solid #b7c7cc;">${escapeHtml(getText('risk'+i+'Cat'))}</td>
-        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;">${escapeHtml(getText('risk'+i+'L').charAt(0))}</td>
-        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;">${escapeHtml(getText('risk'+i+'C').charAt(0))}</td>
-        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;font-weight:700;">${score || '—'}</td>
-        <td style="padding:8px;border:1px solid #b7c7cc;">${escapeHtml(getText('risk'+i+'Resp'))}</td>
-        <td style="padding:8px;border:1px solid #b7c7cc;">${escapeHtml(getText('risk'+i+'Mit'))}</td>
+  function rebuildTable(){
+    const bname=g('businessName'), btype=g('businessType');
+    document.getElementById('tblHeader').textContent=
+      bname?(bname+(btype?' -- '+btype:'')):'';
+    let rows='', any=false;
+    NS.forEach(n=>{
+      const desc=g('r'+n+'d');
+      const cat=g('r'+n+'cat');
+      const lv=g('r'+n+'l'), cv=g('r'+n+'c');
+      if(!desc&&!cat&&!lv&&!cv) return;
+      any=true;
+      const l=parseInt(lv)||0, c=parseInt(cv)||0, score=l*c;
+      const info=lvl(score);
+      rows+=`<tr>
+        <td class="num-cell">${n}</td>
+        <td>${esc(desc)||'<em style="color:#aaa">--</em>'}</td>
+        <td>${esc(cat)||'<em style="color:#aaa">--</em>'}</td>
+        <td class="score-cell">${l||'--'}</td>
+        <td class="score-cell">${c||'--'}</td>
+        <td class="score-cell">${score||'--'}</td>
+        <td class="level-cell ${info.cellCls}">${info.label==='--'?'<span style="color:#aaa">--</span>':info.label}</td>
+        <td>${esc(g('r'+n+'resp'))||'<em style="color:#aaa">--</em>'}</td>
+        <td>${esc(g('r'+n+'mit'))||''}</td>
       </tr>`;
-    }
-    return rows;
+    });
+    document.getElementById('tblBody').innerHTML=any?rows:
+      '<tr class="empty-row"><td colspan="9">Complete the rows above and your risk register will appear here.</td></tr>';
   }
 
-  function exportToWord() {
-    saveState();
-    const docTitle = (getText('businessName')||'Week-8-Activity-3-Risk-Register').replace(/[^a-z0-9\-\s]/gi,'').trim().replace(/\s+/g,'-');
-    const content = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"></head>
-    <body style="font-family:Arial,sans-serif;color:#22313a;line-height:1.45;">
-    <h1 style="color:#0b4f57;">MMM760 | Week 8 Activity 3 | Risk Register</h1>
-    <p><strong>Business:</strong> ${escapeHtml(getText('businessName'))}</p>
-    <p><strong>Nature of business:</strong> ${escapeHtml(getText('businessType'))}</p>
-    <h2 style="color:#0b4f57;margin-top:20px;">Risk Register</h2>
-    <table style="width:100%;border-collapse:collapse;">
-      <thead><tr style="background:#b9d7e3;">
-        <th style="padding:8px;border:1px solid #7aa8bf;text-align:left;width:25%;">Risk description</th>
-        <th style="padding:8px;border:1px solid #7aa8bf;text-align:left;width:13%;">Category</th>
-        <th style="padding:8px;border:1px solid #7aa8bf;text-align:center;width:6%;">L</th>
-        <th style="padding:8px;border:1px solid #7aa8bf;text-align:center;width:6%;">C</th>
-        <th style="padding:8px;border:1px solid #7aa8bf;text-align:center;width:7%;">Score</th>
-        <th style="padding:8px;border:1px solid #7aa8bf;text-align:left;width:13%;">Response</th>
-        <th style="padding:8px;border:1px solid #7aa8bf;text-align:left;width:30%;">Mitigation action</th>
-      </tr></thead>
-      <tbody>${buildRiskRows()}</tbody>
-    </table>
-    <h2 style="color:#0b4f57;margin-top:20px;">Reflection</h2>
-    <p>${escapeHtml(getText('reflection'))}</p>
-    </body></html>`;
-    const blob = new Blob(['\ufeff', content], { type: 'application/msword' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob); link.download = docTitle + '.doc';
-    document.body.appendChild(link); link.click(); document.body.removeChild(link);
-    URL.revokeObjectURL(link.href);
+  function setS(id,t,cls){ const e=document.getElementById(id); if(e){e.textContent=t;e.className='status-text '+cls;} }
+
+  function updateProgress(){
+    const cc=[g('businessName'),g('businessType')].filter(Boolean).length;
+    const cr=NS.filter(n=>g('r'+n+'d')&&g('r'+n+'cat')&&g('r'+n+'l')&&g('r'+n+'c')&&g('r'+n+'resp')).length;
+    const cf=g('reflection')?1:0;
+    const done=[cc>=2,cr>=5,cf>=1].filter(Boolean).length;
+    document.getElementById('progressFill').style.width=(done/3*100)+'%';
+    document.getElementById('progressCopy').textContent=done+' of 3 sections complete';
+    setS('sCxt',cc+' of 2',cc>=2?'complete':cc>0?'progress':'empty');
+    setS('sRsk',cr+' of 5',cr>=5?'complete':cr>0?'progress':'empty');
+    setS('sRef',cf+' of 1',cf>=1?'complete':'empty');
   }
 
-  function resetWorksheet() {
-    if (!window.confirm('Reset this worksheet and clear all saved entries?')) return;
-    document.querySelectorAll('input,textarea,select').forEach(f => { f.value = ''; });
-    for (let i = 1; i <= 5; i++) { const b = document.getElementById('scoreBadge'+i); if(b){ b.textContent='Score: —'; b.className='score-badge'; } }
-    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
-    updateProgress();
+  function save(){
+    const s={};
+    IDS.forEach(id=>{const e=document.getElementById(id);if(e)s[id]=e.value;});
+    try{localStorage.setItem(SK,JSON.stringify(s));}catch(e){}
+    NS.forEach(n=>refreshBadge(n));
+    rebuildTable(); updateProgress();
   }
 
-  document.querySelectorAll('input,textarea,select').forEach(f => { f.addEventListener('input', saveState); f.addEventListener('change', saveState); });
-  document.getElementById('resetBtn').addEventListener('click', resetWorksheet);
-  document.getElementById('exportBtn').addEventListener('click', exportToWord);
-  document.getElementById('printBtn').addEventListener('click', () => window.print());
-  loadState();
+  function load(){
+    try{
+      const raw=localStorage.getItem(SK);
+      if(raw){const s=JSON.parse(raw);Object.keys(s).forEach(k=>{const e=document.getElementById(k);if(e)e.value=s[k];});}
+    }catch(e){}
+    NS.forEach(n=>refreshBadge(n));
+    rebuildTable(); updateProgress();
+  }
+
+  function buildWordRows(){
+    return NS.map(n=>{
+      const desc=g('r'+n+'d'); if(!desc) return '';
+      const l=parseInt(g('r'+n+'l'))||0, c=parseInt(g('r'+n+'c'))||0, score=l*c;
+      const info=lvl(score);
+      const ls=info.label==='Extreme'?'background:#f44336;color:#fff;':
+               info.label==='High'?'background:#ff9800;color:#fff;':
+               info.label==='Moderate'?'background:#ffc107;color:#22313a;':
+               info.label==='Low'?'background:#4caf50;color:#fff;':'';
+      return `<tr>
+        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;font-weight:700;">${n}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;">${esc(desc)}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;">${esc(g('r'+n+'cat'))}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;">${l||'--'}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;">${c||'--'}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;font-weight:700;">${score||'--'}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;text-align:center;font-weight:700;${ls}">${info.label}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;">${esc(g('r'+n+'resp'))}</td>
+        <td style="padding:8px;border:1px solid #b7c7cc;">${esc(g('r'+n+'mit'))}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function exportWord(){
+    save();
+    const bname=g('businessName')||'Practice business';
+    const btype=g('businessType');
+    const fname=(g('businessName')||'Week-8-Activity-3-Risk-Register').replace(/[^a-z0-9\-\s]/gi,'').trim().replace(/\s+/g,'-');
+    const th='background:#0b4f57;color:#ffffff;padding:9px 10px;border:1px solid #7aa8bf;text-align:left;';
+    const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"></head>
+<body style="font-family:Arial,sans-serif;color:#22313a;line-height:1.45;">
+<h1 style="color:#0b4f57;">MMM760 | Week 8 | Risk Register</h1>
+<p><strong>Business:</strong> ${esc(bname)}${btype?' &mdash; '+esc(btype):''}</p>
+<table style="width:100%;border-collapse:collapse;margin-top:16px;">
+<thead><tr>
+  <th style="${th}width:24px;">#</th>
+  <th style="${th}width:22%;">Risk description</th>
+  <th style="${th}width:11%;">Category</th>
+  <th style="${th}width:7%;text-align:center;">Likelihood</th>
+  <th style="${th}width:7%;text-align:center;">Consequence</th>
+  <th style="${th}width:6%;text-align:center;">Score</th>
+  <th style="${th}width:9%;text-align:center;">Risk level</th>
+  <th style="${th}width:12%;">Response strategy</th>
+  <th style="${th}">Mitigation action</th>
+</tr></thead>
+<tbody>${buildWordRows()}</tbody>
+</table>
+${g('reflection')?'<h2 style="color:#0b4f57;margin-top:24px;">Reflection</h2><p>'+esc(g('reflection'))+'</p>':''}
+<p style="margin-top:20px;font-size:12px;color:#888;">Risk level: Low = 1-5 (green) | Moderate = 6-11 (amber) | High = 12-19 (orange) | Extreme = 20-25 (red). Score = Likelihood x Consequence. Framework: AS/NZS ISO 31000:2018.</p>
+</body></html>`;
+    const blob=new Blob(['\ufeff',html],{type:'application/msword'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download=fname+'.doc';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  }
+
+  function reset(){
+    if(!confirm('Reset this worksheet and clear all saved entries?')) return;
+    document.querySelectorAll('input,textarea,select').forEach(f=>{f.value='';});
+    NS.forEach(n=>{const b=document.getElementById('sb'+n);if(b){b.textContent='Score: --';b.className='score-badge';}});
+    try{localStorage.removeItem(SK);}catch(e){}
+    rebuildTable(); updateProgress();
+  }
+
+  document.querySelectorAll('input,textarea,select').forEach(f=>{
+    f.addEventListener('input',save); f.addEventListener('change',save);
+  });
+  document.getElementById('resetBtn').addEventListener('click',reset);
+  document.getElementById('exportBtn').addEventListener('click',exportWord);
+  document.getElementById('printBtn').addEventListener('click',()=>window.print());
+  load();
 </script>
 </body>
 </html>
